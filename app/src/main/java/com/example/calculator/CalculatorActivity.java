@@ -3,9 +3,12 @@ package com.example.calculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ public class CalculatorActivity extends AppCompatActivity {
             mButtonDelete, mButtonZero, mButtonOne, mButtonTwo, mButtonThree, mButtonFour,
             mButtonFive, mButtonSix, mButtonSeven, mButtonEight, mButtonNine;
 
+    private HorizontalScrollView mScrollView;
     private int[] buttonNumber = {R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4,
             R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_dot};
 
@@ -34,8 +38,10 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
 
         findViews();
-        if (savedInstanceState != null)
+        if (savedInstanceState != null){
             mTextViewResult.setText(savedInstanceState.getString(KEY_RESULT_STRING));
+            flag = false;
+        }
         setListeners();
     }
 
@@ -45,10 +51,12 @@ public class CalculatorActivity extends AppCompatActivity {
         outState.putString(KEY_RESULT_STRING, mTextViewResult.getText().toString());
     }
 
+    @SuppressLint("WrongViewCast")
     private void findViews() {
         mTextViewResult = findViewById(R.id.txtview_result);
         mButtonEqual = findViewById(R.id.btn_equal);
         mButtonDelete = findViewById(R.id.btn_delete);
+        mScrollView = findViewById(R.id.scroll);
     }
 
     private void showNumber(int id) {
@@ -91,6 +99,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private void setNumber(int resID) {
         mTextViewResult.setText(mTextViewResult.getText().toString() + getResources().getString(resID));
+        mScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         Toast.makeText(this, resID, Toast.LENGTH_SHORT).show();
     }
 
