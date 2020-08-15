@@ -17,7 +17,9 @@
         android:gravity="center|left"
         android:text="0"
         android:textColor="#FFFFFF"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:singleLine="true"
+        android:scrollHorizontally="true"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

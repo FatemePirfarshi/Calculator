@@ -260,4 +260,5 @@ public class CalculatorActivity extends AppCompatActivity {
     public static double division(double input1, double input2) {
         return input1 / input2;
     }
+
 }
