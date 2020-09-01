@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +19,10 @@ public class CalculatorActivity extends AppCompatActivity {
     public static final String KEY_RESULT_STRING = "resultString";
     private TextView mTextViewResult;
 
-    private Button mButtonDot, mButtonEqual, mButtonSum, mButtonSub, mButtonMultiply, mButtonDivison,
-            mButtonDelete, mButtonZero, mButtonOne, mButtonTwo, mButtonThree, mButtonFour,
-            mButtonFive, mButtonSix, mButtonSeven, mButtonEight, mButtonNine;
+    private Button mButtonEqual, mButtonDelete;
 
     private HorizontalScrollView mScrollView;
+
     private int[] buttonNumber = {R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4,
             R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_dot};
 
@@ -38,9 +36,14 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
 
         findViews();
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             mTextViewResult.setText(savedInstanceState.getString(KEY_RESULT_STRING));
-            flag = false;
+            try {
+                if (Double.parseDouble(savedInstanceState.getString(KEY_RESULT_STRING)) != 0)
+                    flag = false;
+            } catch (NumberFormatException number) {
+
+            }
         }
         setListeners();
     }
